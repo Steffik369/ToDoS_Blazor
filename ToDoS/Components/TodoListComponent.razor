@@ -1,0 +1,23 @@
+﻿@if (ViewModel?.TodoItems == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="card-deck">
+        @foreach (var todoitem in ViewModel.TodoItems.OrderBy(x => x.IsDone).ThenBy(x => x.DateAdded))
+        {
+            <div class="card mb-3 @(todoitem.IsDone ? "bg-light" : "text-white bg-dark" )" style="min-width: 18rem; max-width: 18rem;">
+                <div class="card-header">@($"{todoitem.DateAdded:d} - {todoitem.Title}")</div>
+                <div class="card-body">
+                    <p class="card-text">@todoitem.Body</p>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    [CascadingParameter(Name = "ViewModel")]
+    ITodoViewModel ViewModel { get; set; }
+}
