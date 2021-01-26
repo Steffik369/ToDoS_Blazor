@@ -4,20 +4,53 @@
 }
 else
 {
-    <div class="card-deck">
-        @foreach (var todoitem in ViewModel.TodoItems.OrderBy(x => x.IsDone).ThenBy(x => x.DateAdded))
-        {
-            <div class="card mb-3 @(todoitem.IsDone ? "bg-light" : "text-white bg-dark" )" style="min-width: 18rem; max-width: 18rem;">
-                <div class="card-header">@($"{todoitem.DateAdded:d} - {todoitem.Title}")</div>
-                <div class="card-body">
-                    <p class="card-text">@todoitem.Body</p>
+<AntList Bordered DataSource="@ViewModel.TodoItems" TItem="TodoItem" OnItemClick="ItemClick">
+    <Header>Todo list</Header>
+    <ChildContent Context="item">
+        <ListItem>
+            <ListItemMeta Description="@item.Body">
+                <TitleTemplate>
+                    <Icon Type="@(item.IsDone? "check-circle" : "minus-circle")" Theme="@(item.IsDone? "fill" : "outline")" Style="font-size: 30px; padding-right: 10px;" />
+
+                    @if (item.IsDone)
+                    {
+                        <strike>@($"{item.DateAdded:d} - {item.Title}")</strike>
+                    }
+                    else
+                    {
+                        @($"{item.DateAdded:d} - {item.Title}")
+                    }
+
+                </TitleTemplate>
+            </ListItemMeta>
+        </ListItem>
+    </ChildContent>
+</AntList>
+
+
+    @*<div class="card-deck">
+                    @foreach (var todoitem in ViewModel.TodoItems.OrderBy(x => x.IsDone).ThenBy(x => x.DateAdded))
+                    {
+                        <div class="card mb-3 @(todoitem.IsDone ? "bg-light" : "text-white bg-dark" )" style="min-width: 18rem; max-width: 18rem;">
+                            <div class="card-header">@($"{todoitem.DateAdded:d} - {todoitem.Title}")</div>
+                            <div class="card-body">
+                                <p class="card-text">@todoitem.Body</p>
+                            </div>
+                        </div>
+                    }
                 </div>
-            </div>
-        }
-    </div>
+        }*@
+
+
+
 }
 
-@code {
-    [CascadingParameter(Name = "ViewModel")]
-    ITodoViewModel ViewModel { get; set; }
-}
+    @code {
+        [CascadingParameter(Name = "ViewModel")]
+        ITodoViewModel ViewModel { get; set; }
+
+        public void ItemClick(TodoItem item)
+        {
+            ViewModel.ChangeItemState(item);
+        }
+    }

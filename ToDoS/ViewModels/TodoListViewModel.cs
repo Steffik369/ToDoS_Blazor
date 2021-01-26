@@ -16,14 +16,14 @@ namespace ToDoS.ViewModels
             AddTodoItem(new TodoItem()
             {
                 Title = "item 1",
-                Body = "Body 1",
+                Body = "Hodně dlouhý popis, ale fakt podrobný, ukolu 1.",
                 DateAdded = DateTime.Now,
             });
 
             AddTodoItem(new TodoItem()
             {
                 Title = "item 2",
-                Body = "Body 2",
+                Body = "Popis ukolu 2.",
                 DateAdded = DateTime.Now,
             });
         }
@@ -59,6 +59,13 @@ namespace ToDoS.ViewModels
         public void SaveToDoItem(TodoItem todoitem)
         {
             throw new NotImplementedException();
+        }
+
+        public void ChangeItemState(TodoItem todoitem)
+        {
+            IsBusy = true;
+            todoitem.IsDone = !todoitem.IsDone;
+            isBusy = false;
         }
 
 

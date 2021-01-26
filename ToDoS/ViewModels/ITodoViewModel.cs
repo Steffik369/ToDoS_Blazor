@@ -18,6 +18,7 @@ namespace ToDoS.ViewModels
         void SaveToDoItem(TodoItem todoitem);
         void AddTodoItem(TodoItem todoitem);
         void RemoveTodoItem(TodoItem todoitem);
+        void ChangeItemState(TodoItem todoitem);
 
     }
 }

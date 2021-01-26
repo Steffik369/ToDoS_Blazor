@@ -1,32 +1,25 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">ToDoS</a>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
-
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-column">
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="todo">
-                <span class="oi oi-plus" aria-hidden="true"></span> ToDo
-            </NavLink>
-        </li>
-    </ul>
-</div>
+﻿<Sider Collapsible Collapsed=@collapsed OnCollapse=@onCollapse>
+    <div class="logo" />
+    <Menu Theme="MenuTheme.Dark" DefaultSelectedKeys=@(new[]{"1"}) Mode="MenuMode.Inline">
+        <MenuItem Key="1">
+            <Icon Type="home" Theme="outline" />
+            <span>Home</span>
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All" />
+        </MenuItem>
+        <MenuItem Key="2">
+            <Icon Type="check" Theme="outline" />
+            <span>Todo</span>
+            <NavLink class="nav-link" href="todo" Match="NavLinkMatch.All" />
+        </MenuItem>
+    </Menu>
+</Sider>
 
 @code {
-    private bool collapseNavMenu = true;
+    bool collapsed;
 
-    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
+    void onCollapse(bool collapsed)
     {
-        collapseNavMenu = !collapseNavMenu;
+        Console.WriteLine(collapsed);
+        this.collapsed = collapsed;
     }
 }

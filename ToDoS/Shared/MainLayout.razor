@@ -1,15 +1,25 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="sidebar">
-    <NavMenu />
-</div>
+<Layout Style="min-height: 100vh; ">
+    
+    <Layout Class="site-layout">
+        <NavMenu/>
+        <Content Style="margin:0 16px;">
+            @Body
+        </Content>
+    </Layout>
+</Layout>
 
-<div class="main">
-    <div class="top-row px-4">
-        
-    </div>
 
-    <div class="content px-4">
-        @Body
-    </div>
-</div>
+
+<style>
+    #components-layout-demo-side .logo {
+        height: 32px;
+        background: rgba(255, 255, 255, 0.2);
+        margin: 16px;
+    }
+
+    .site-layout .site-layout-background {
+        background: #fff;
+    }
+</style>
