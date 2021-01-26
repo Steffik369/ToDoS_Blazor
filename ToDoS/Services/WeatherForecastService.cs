@@ -1,8 +1,9 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using ToDoS.Models;
 
-namespace ToDoS.Data
+namespace ToDoS.Services
 {
     public class WeatherForecastService
     {
@@ -17,7 +18,7 @@ namespace ToDoS.Data
             return Task.FromResult(Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = startDate.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
+                TemperatureC = rng.Next(-20, 50),
                 Summary = Summaries[rng.Next(Summaries.Length)]
             }).ToArray());
         }

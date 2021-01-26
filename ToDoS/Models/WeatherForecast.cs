@@ -1,6 +1,6 @@
 using System;
 
-namespace ToDoS.Data
+namespace ToDoS.Models
 {
     public class WeatherForecast
     {
