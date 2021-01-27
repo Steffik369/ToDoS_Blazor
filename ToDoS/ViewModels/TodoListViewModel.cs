@@ -9,7 +9,7 @@ using ToDoS.Models;
 
 namespace ToDoS.ViewModels
 {
-    public class TodoListViewModel : ITodoViewModel
+    public class TodoListViewModel : BaseViewModel, ITodoViewModel
     {
         public TodoListViewModel()
         {
@@ -27,18 +27,6 @@ namespace ToDoS.ViewModels
                 DateAdded = DateTime.Now,
             });
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private bool isBusy = false;
-        public bool IsBusy
-        {
-            get => isBusy;
-            set
-            {
-                isBusy = value;
-                OnPropertyChanged();
-            }
-        }
 
         private ObservableCollection<TodoItem> todoItems = new ObservableCollection<TodoItem>();
         public ObservableCollection<TodoItem> TodoItems
@@ -51,11 +39,6 @@ namespace ToDoS.ViewModels
             }
         }
 
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         public void SaveToDoItem(TodoItem todoitem)
         {
             throw new NotImplementedException();
@@ -65,9 +48,8 @@ namespace ToDoS.ViewModels
         {
             IsBusy = true;
             todoitem.IsDone = !todoitem.IsDone;
-            isBusy = false;
+            IsBusy = false;
         }
-
 
         public void AddTodoItem(TodoItem todoitem)
         {
@@ -76,8 +58,7 @@ namespace ToDoS.ViewModels
 
             TodoItems.Add(todoitem);
 
-            //OnPropertyChanged(nameof(ToDoItemList));
-            isBusy = false; //TODO upravit isBussy
+            IsBusy = false;
         }
 
         public void RemoveTodoItem(TodoItem todoitem)
@@ -87,8 +68,7 @@ namespace ToDoS.ViewModels
 
             TodoItems.Remove(todoitem);
 
-            //OnPropertyChanged(nameof(ToDoItemList));
-            isBusy = false; //TODO upravit isBussy
+            IsBusy = false;
         }
     }
 }
