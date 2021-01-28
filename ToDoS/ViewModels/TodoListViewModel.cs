@@ -13,12 +13,12 @@ namespace ToDoS.ViewModels
     {
         public TodoListViewModel()
         {
-            AddTodoItem(new TodoItem(title: "Item 1", description: "Hodně dlouhý popis, ale fakt podrobný, ukolu 1."));
-            AddTodoItem(new TodoItem(title: "Item 2", description: "popis_ukolu_2"));
+            AddTodoItem(new TodoItem("Item 1"));
+            AddTodoItem(new TodoItem("Item 2"));
         }
 
-        private ObservableCollection<TodoItem> todoItems = new ObservableCollection<TodoItem>();
-        public ObservableCollection<TodoItem> TodoItems
+        private List<TodoItem> todoItems = new List<TodoItem>();
+        public List<TodoItem> TodoItems
         {
             get => todoItems;
             private set
@@ -28,34 +28,41 @@ namespace ToDoS.ViewModels
             }
         }
 
-        public void SaveToDoItem(TodoItem todoitem)
+        public void SaveToDoItem(TodoItem todoItem)
         {
             throw new NotImplementedException();
         }
 
-        public void ChangeItemStatus(TodoItem todoitem)
+        public void ChangeItemStatus(TodoItem todoItem)
         {
             IsBusy = true;
-            todoitem.Status = todoitem.Status == ItemStatus.Todo ? ItemStatus.Completed : ItemStatus.Todo;
+            todoItem.Status = todoItem.Status == ItemStatus.Todo ? ItemStatus.Completed : ItemStatus.Todo;
             IsBusy = false;
         }
 
-        public void AddTodoItem(TodoItem todoitem)
+        public void AddTodoItem(TodoItem todoItem)
         {
             IsBusy = true;
-            if (todoitem == null) return;
+            if (todoItem == null || TodoItems.Contains(todoItem)) return;
 
-            TodoItems.Add(todoitem);
+            TodoItems.Add(todoItem);
 
             IsBusy = false;
         }
 
-        public void RemoveTodoItem(TodoItem todoitem)
+        public void CreateNewItem(string title)
+        {
+            if (string.IsNullOrWhiteSpace(title)) throw new ArgumentException("Title cannot be empty");
+
+            AddTodoItem(new TodoItem(title: title));
+        }
+
+        public void RemoveTodoItem(TodoItem todoItem)
         {
             IsBusy = true;
-            if (todoitem == null) return;
+            if (todoItem == null) return;
 
-            TodoItems.Remove(todoitem);
+            TodoItems.Remove(todoItem);
 
             IsBusy = false;
         }

@@ -1,0 +1,21 @@
+﻿<form @onsubmit=Enter>
+    <Icon Type="minus-circle" Style="font-size: 30px; padding-right: 10px;" />
+    <input type="text" placeholder="Something to do..." @bind="newItemTitle" />
+    @*<Input type="text" placeholder="Something to do... 3" @bind-Value="@newItemTitle" />*@
+
+</form>
+
+@code
+{
+    [CascadingParameter(Name = "todoListViewModel")]
+    ITodoViewModel? todoListViewModel { get; set; }
+
+    private string newItemTitle = string.Empty;
+
+    private void Enter()
+    {
+        if (string.IsNullOrWhiteSpace(newItemTitle)) return;
+        todoListViewModel?.CreateNewItem(newItemTitle);
+        newItemTitle = string.Empty;
+    }
+}

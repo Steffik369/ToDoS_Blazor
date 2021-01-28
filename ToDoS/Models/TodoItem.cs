@@ -8,17 +8,15 @@ namespace ToDoS.Models
 {
     public class TodoItem
     {
-        public TodoItem(string title, string description)
+        public TodoItem(string title)
         {
             Title = title;
-            Description = description;
             Status = ItemStatus.Todo;
             DateAdded = DateTime.Now;
             DateLastUpdate = DateAdded;
         }
 
         public string Title { get; set; }
-        public string Description { get; set; }
 
         private ItemStatus status;
 

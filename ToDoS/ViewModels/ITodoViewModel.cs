@@ -11,13 +11,14 @@ namespace ToDoS.ViewModels
     public interface ITodoViewModel
     {
         bool IsBusy { get; set; }
-        ObservableCollection<TodoItem> TodoItems { get; }
+        List<TodoItem> TodoItems { get; }
 
         event PropertyChangedEventHandler PropertyChanged;
 
-        void SaveToDoItem(TodoItem todoitem);
-        void AddTodoItem(TodoItem todoitem);
-        void RemoveTodoItem(TodoItem todoitem);
-        void ChangeItemStatus(TodoItem todoitem);
+        void SaveToDoItem(TodoItem todoItem);
+        void AddTodoItem(TodoItem todoItem);
+        void RemoveTodoItem(TodoItem todoItem);
+        void ChangeItemStatus(TodoItem todoItem);
+        void CreateNewItem(string title);
     }
 }

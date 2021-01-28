@@ -1,14 +1,14 @@
-﻿@if (ViewModel?.TodoItems == null)
+﻿@if (todoListViewModel?.TodoItems == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <AntList Bordered DataSource="@ViewModel.TodoItems" TItem="TodoItem" OnItemClick="ItemClick">
+    <AntList Bordered DataSource="@todoListViewModel.TodoItems.OrderBy(x=>x.IsDone()).ThenBy(x=>x.DateAdded)" TItem="TodoItem" OnItemClick="ItemClick">
         <Header>Todo list</Header>
         <ChildContent Context="item">
             <ListItem>
-                <ListItemMeta Description="@item.Description">
+                <ListItemMeta>
                     <TitleTemplate>
                         <Icon Type="@(item.IsDone()? "check-circle" : "minus-circle")" Theme="@(item.IsDone()? "fill" : "outline")" Style="font-size: 30px; padding-right: 10px;" />
 
@@ -29,11 +29,11 @@ else
 }
 
 @code {
-    [CascadingParameter(Name = "ViewModel")]
-    ITodoViewModel? ViewModel { get; set; }
+    [CascadingParameter(Name = "todoListViewModel")]
+    ITodoViewModel? todoListViewModel { get; set; }
 
     public void ItemClick(TodoItem item)
     {
-        ViewModel?.ChangeItemStatus(item);
+        todoListViewModel?.ChangeItemStatus(item);
     }
 }

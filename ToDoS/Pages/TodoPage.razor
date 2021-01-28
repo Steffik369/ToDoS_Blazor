@@ -1,18 +1,19 @@
 ﻿@page "/todo"
 
-@inject ITodoViewModel ViewModel
-@using System.ComponentModel;
+@inject ITodoViewModel todoListViewModel
+@using System.ComponentModel
 @implements IDisposable
 
-<CascadingValue Value=@ViewModel Name="ViewModel">
+<CascadingValue Value=@todoListViewModel Name="todoListViewModel">
     <TodoListComponent/>
+    <TodoListAddComponent/>
 </CascadingValue>
 
 @code {
 
     protected override async Task OnInitializedAsync()
     {
-        ViewModel.PropertyChanged += async (sender, e) =>
+        todoListViewModel.PropertyChanged += async (sender, e) =>
         {
             await InvokeAsync(() =>
             {
@@ -32,6 +33,6 @@
 
     public void Dispose()
     {
-        ViewModel.PropertyChanged -= OnPropertyChangedHandler;
+        todoListViewModel.PropertyChanged -= OnPropertyChangedHandler;
     }
 }
