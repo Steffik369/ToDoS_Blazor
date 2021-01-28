@@ -13,19 +13,8 @@ namespace ToDoS.ViewModels
     {
         public TodoListViewModel()
         {
-            AddTodoItem(new TodoItem()
-            {
-                Title = "item 1",
-                Body = "Hodně dlouhý popis, ale fakt podrobný, ukolu 1.",
-                DateAdded = DateTime.Now,
-            });
-
-            AddTodoItem(new TodoItem()
-            {
-                Title = "item 2",
-                Body = "Popis ukolu 2.",
-                DateAdded = DateTime.Now,
-            });
+            AddTodoItem(new TodoItem(title: "Item 1", description: "Hodně dlouhý popis, ale fakt podrobný, ukolu 1."));
+            AddTodoItem(new TodoItem(title: "Item 2", description: "popis_ukolu_2"));
         }
 
         private ObservableCollection<TodoItem> todoItems = new ObservableCollection<TodoItem>();
@@ -44,10 +33,10 @@ namespace ToDoS.ViewModels
             throw new NotImplementedException();
         }
 
-        public void ChangeItemState(TodoItem todoitem)
+        public void ChangeItemStatus(TodoItem todoitem)
         {
             IsBusy = true;
-            todoitem.IsDone = !todoitem.IsDone;
+            todoitem.Status = todoitem.Status == ItemStatus.Todo ? ItemStatus.Completed : ItemStatus.Todo;
             IsBusy = false;
         }
 
