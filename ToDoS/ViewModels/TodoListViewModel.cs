@@ -66,12 +66,7 @@ namespace ToDoS.ViewModels
 
         public void RemoveTodoItem(TodoItem todoItem)
         {
-            IsBusy = true;
-            if (todoItem == null) return;
-
-            TodoItems.Remove(todoItem);
-
-            IsBusy = false;
+            throw new NotImplementedException();
         }
     }
 }
