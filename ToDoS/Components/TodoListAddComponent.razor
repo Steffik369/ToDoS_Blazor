@@ -1,8 +1,10 @@
-﻿<form @onsubmit=Enter>
-    <Icon Type="minus-circle" Style="font-size: 30px; padding-right: 10px;" />
-    <input type="text" placeholder="Something to do..." @bind="newItemTitle" />
-    @*<Input type="text" placeholder="Something to do... 3" @bind-Value="@newItemTitle" />*@
-
+﻿<form @onsubmit=Enter class="formInput">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">+</span>
+        </div>
+        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" placeholder="Something to do..." @bind="newItemTitle">
+    </div>
 </form>
 
 @code
@@ -19,3 +21,19 @@
         newItemTitle = string.Empty;
     }
 }
+
+
+<style>
+    .form-controlllll{
+        background-color: rgba(0,0,0,0.7);
+        border: none;
+        color: white;
+    }
+
+    .formInput {
+        background-color: rgba(0,0,0,0.7);
+        border: none;
+        color: white;
+    }
+
+</style>

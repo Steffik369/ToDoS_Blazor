@@ -4,10 +4,12 @@
 @using System.ComponentModel
 @implements IDisposable
 
-<CascadingValue Value=@todoListViewModel Name="todoListViewModel">
-    <TodoListComponent/>
-    <TodoListAddComponent/>
-</CascadingValue>
+<div class="mainBody">
+    <CascadingValue Value=@todoListViewModel Name="todoListViewModel">
+        <TodoListComponent />
+        <TodoListAddComponent />
+    </CascadingValue>
+</div>
 
 @code {
 
@@ -36,3 +38,14 @@
         todoListViewModel.PropertyChanged -= OnPropertyChangedHandler;
     }
 }
+
+
+<style>
+    .mainBody {
+        min-height: 100vh;
+        background-image: url(/Images/green.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+</style>

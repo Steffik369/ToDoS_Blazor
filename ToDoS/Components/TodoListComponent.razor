@@ -4,12 +4,12 @@
 }
 else
 {
-    <AntList Bordered DataSource="@todoListViewModel.TodoItems.OrderBy(x=>x.IsDone()).ThenBy(x=>x.DateAdded)" TItem="TodoItem" OnItemClick="ItemClick">
-        <Header>Todo list</Header>
-        <ChildContent Context="item">
-            <ListItem>
-                <ListItemMeta>
-                    <TitleTemplate>
+    <div class="itemList">
+        <AntList DataSource="@todoListViewModel.TodoItems.OrderBy(x=>x.IsDone()).ThenBy(x=>x.DateAdded)" Size="small" TItem="TodoItem" OnItemClick="ItemClick">
+            <Header>Todo list</Header>
+            <ChildContent Context="item">
+                <ListItem>
+                    <span class="item">
                         <Icon Type="@(item.IsDone()? "check-circle" : "minus-circle")" Theme="@(item.IsDone()? "fill" : "outline")" Style="font-size: 30px; padding-right: 10px;" />
 
                         @if (item.IsDone())
@@ -20,12 +20,11 @@ else
                         {
                             @($"{item.DateAdded:d} - {item.Title}")
                         }
-
-                    </TitleTemplate>
-                </ListItemMeta>
-            </ListItem>
-        </ChildContent>
-    </AntList>
+                    </span>
+                </ListItem>
+            </ChildContent>
+        </AntList>
+    </div>
 }
 
 @code {
@@ -37,3 +36,15 @@ else
         todoListViewModel?.ChangeItemStatus(item);
     }
 }
+
+<style>
+    .itemList{
+        background-color: rgba(0,0,0,0.5);
+        color: white;
+    }
+
+    .item {
+        color: white;
+    }
+
+</style>

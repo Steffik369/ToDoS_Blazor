@@ -1,5 +1,5 @@
 ﻿<Sider Collapsible Collapsed=@collapsed OnCollapse=@onCollapse>
-    <div class="logo" />
+    <h3 class="header">@(collapsed ? " "  : "ToDos")</h3>
     <Menu Theme="MenuTheme.Dark" DefaultSelectedKeys=@(new[]{"1"}) Mode="MenuMode.Inline">
         <MenuItem Key="1">
             <Icon Type="home" Theme="outline" />
@@ -23,3 +23,11 @@
         this.collapsed = collapsed;
     }
 }
+
+<style>
+    .header {
+        padding-left: 20px;
+        margin: 16px 24px 16px 0;
+        color: white;    
+    }
+</style>
