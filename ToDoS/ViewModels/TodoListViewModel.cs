@@ -1,20 +1,25 @@
-﻿using System;
+﻿using ModelLayer.Models;
+using ModelLayer.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using ToDoS.Models;
+using TodoRepository.CSV;
 
 namespace ToDoS.ViewModels
 {
     public class TodoListViewModel : BaseViewModel, ITodoViewModel
     {
+        ITodoRepository TodoRepository;
         public TodoListViewModel()
         {
-            AddTodoItem(new TodoItem("Item 1"));
-            AddTodoItem(new TodoItem("Item 2"));
+            TodoRepository = new CSVRepository();
+            todoItems = TodoRepository.GetAllItems().ToList();
+            //AddTodoItem(new TodoItem("Item 1"));
+            //AddTodoItem(new TodoItem("Item 2"));
         }
 
         private List<TodoItem> todoItems = new List<TodoItem>();
@@ -43,9 +48,11 @@ namespace ToDoS.ViewModels
         public void AddTodoItem(TodoItem todoItem)
         {
             IsBusy = true;
-            if (todoItem == null || TodoItems.Contains(todoItem)) return;
+            if (todoItem == null) return;
 
-            TodoItems.Add(todoItem);
+            TodoRepository.AddItem(todoItem);
+            TodoItems = TodoRepository.GetAllItems().ToList();
+            //TodoItems.Add(todoItem);
 
             IsBusy = false;
         }

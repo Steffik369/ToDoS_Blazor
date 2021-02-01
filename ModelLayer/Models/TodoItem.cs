@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-namespace ToDoS.Models
+namespace ModelLayer.Models
 {
     public class TodoItem
     {
@@ -16,6 +16,16 @@ namespace ToDoS.Models
             DateLastUpdate = DateAdded;
         }
 
+        public TodoItem(uint id, string title, ItemStatus status, DateTime dateAdded, DateTime dateLastUpdate)
+        {
+            Id = id;
+            Title = title;
+            Status = status;
+            DateAdded = dateAdded;
+            DateLastUpdate = dateLastUpdate;
+        }
+
+        public uint Id { get; set; }
         public string Title { get; set; }
 
         private ItemStatus status;
