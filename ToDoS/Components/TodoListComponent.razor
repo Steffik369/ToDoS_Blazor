@@ -4,23 +4,25 @@
 }
 else
 {
+    <h2>Todo list</h2>
     <div class="itemList">
         @foreach(TodoItem item in todoListViewModel.TodoItems.OrderBy(item=>item.IsDone).ThenBy(x=>x.DateAdded))
         {
         <div class="item">
             <span @onclick="@(() => { ItemChangeStatus(item); })">
                 <Icon Type="@(item.IsDone? "check-circle" : "minus-circle")" Theme="@(item.IsDone? "fill" : "outline")" Style="font-size: 30px; padding: 10px;" />
-
-                @if (item.IsDone)
-                {
-                    <strike>@($"{item.DateAdded:d} - {item.Title}")</strike>
-                }
-                else
-                {
-                    @($"{item.DateAdded:d} - {item.Title}")
-                }
+                <span>
+                    @if (item.IsDone)
+                    {
+                        <strike>@($"{item.DateAdded:d} - {item.Title}")</strike>
+                    }
+                    else
+                    {
+                        @($"{item.DateAdded:d} - {item.Title}")
+                    }
+                </span>
             </span>
-            <Icon Type="close" Style="font-size: 25px; color: white; padding: 10px;"  @onclick="@(() => { ItemDelete(item); })"/>
+            <Icon Type="close" class="removeButton"  @onclick="@(() => { ItemDelete(item); })"/>
         </div>
         }
     </div>
@@ -44,17 +46,37 @@ else
 <style>
     .itemList {
         background-color: rgba(0,0,0,0.5);
+        margin-left: 10px;
+        margin-right: 10px;
         color: white;
+        border-radius: 5px;
+        padding-bottom: 2px;
     }
 
     .item {
         color: white;
         border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-        margin-left: 10px;
-        margin-right: 10px;
         display: flex;
         justify-content: space-between;
-        
+        margin: 5px;
     }
 
+    .removeButton {
+        font-size: 20px;
+        color: white;
+        padding: 10px;
+        padding-top: 13px;
+        opacity: 0.5;
+    }
+
+    .removeButton:hover {
+        opacity: 1;
+    }
+
+
+    h2 {
+        color: white;
+        padding-left: 20px;
+        padding-top: 10px;
+    }
 </style>
