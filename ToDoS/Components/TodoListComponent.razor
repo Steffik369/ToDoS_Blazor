@@ -5,25 +5,24 @@
 else
 {
     <div class="itemList">
-        <AntList DataSource="@todoListViewModel.TodoItems.OrderBy(x=>x.IsDone()).ThenBy(x=>x.DateAdded)" Size="small" TItem="TodoItem" OnItemClick="ItemClick">
-            <Header>Todo list</Header>
-            <ChildContent Context="item">
-                <ListItem>
-                    <span class="item">
-                        <Icon Type="@(item.IsDone()? "check-circle" : "minus-circle")" Theme="@(item.IsDone()? "fill" : "outline")" Style="font-size: 30px; padding-right: 10px;" />
+        @foreach(TodoItem item in todoListViewModel.TodoItems.OrderBy(item=>item.IsDone).ThenBy(x=>x.DateAdded))
+        {
+        <div class="item">
+            <span @onclick="@(() => { ItemChangeStatus(item); })">
+                <Icon Type="@(item.IsDone? "check-circle" : "minus-circle")" Theme="@(item.IsDone? "fill" : "outline")" Style="font-size: 30px; padding: 10px;" />
 
-                        @if (item.IsDone())
-                        {
-                            <strike>@($"{item.DateAdded:d} - {item.Title}")</strike>
-                        }
-                        else
-                        {
-                            @($"{item.DateAdded:d} - {item.Title}")
-                        }
-                    </span>
-                </ListItem>
-            </ChildContent>
-        </AntList>
+                @if (item.IsDone)
+                {
+                    <strike>@($"{item.DateAdded:d} - {item.Title}")</strike>
+                }
+                else
+                {
+                    @($"{item.DateAdded:d} - {item.Title}")
+                }
+            </span>
+            <Icon Type="close" Style="font-size: 25px; color: white; padding: 10px;"  @onclick="@(() => { ItemDelete(item); })"/>
+        </div>
+        }
     </div>
 }
 
@@ -31,20 +30,31 @@ else
     [CascadingParameter(Name = "todoListViewModel")]
     ITodoViewModel? todoListViewModel { get; set; }
 
-    public void ItemClick(TodoItem item)
+    public void ItemChangeStatus(TodoItem item)
     {
         todoListViewModel?.ChangeItemStatus(item);
+    }
+
+    public void ItemDelete(TodoItem item)
+    {
+        todoListViewModel?.RemoveTodoItem(item);
     }
 }
 
 <style>
-    .itemList{
+    .itemList {
         background-color: rgba(0,0,0,0.5);
         color: white;
     }
 
     .item {
         color: white;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        margin-left: 10px;
+        margin-right: 10px;
+        display: flex;
+        justify-content: space-between;
+        
     }
 
 </style>

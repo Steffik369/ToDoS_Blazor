@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 
 namespace ToDoS.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-
         private bool isBusy = false;
 
         public bool IsBusy

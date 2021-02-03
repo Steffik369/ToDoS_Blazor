@@ -2,11 +2,7 @@
 using ModelLayer.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using TodoRepository.CSV;
 
 namespace ToDoS.ViewModels
@@ -18,8 +14,6 @@ namespace ToDoS.ViewModels
         {
             TodoRepository = new CSVRepository();
             todoItems = TodoRepository.GetAllItems().ToList();
-            //AddTodoItem(new TodoItem("Item 1"));
-            //AddTodoItem(new TodoItem("Item 2"));
         }
 
         private List<TodoItem> todoItems = new List<TodoItem>();
@@ -35,38 +29,40 @@ namespace ToDoS.ViewModels
 
         public void SaveToDoItem(TodoItem todoItem)
         {
-            throw new NotImplementedException();
+            if (todoItem == null) throw new ArgumentNullException(nameof(todoItem), "Not item given.");
+
+            TodoRepository.UpdateItem(todoItem);
         }
 
         public void ChangeItemStatus(TodoItem todoItem)
         {
-            IsBusy = true;
+            if (todoItem == null) throw new ArgumentNullException(nameof(todoItem), "Not item given.");
+
             todoItem.Status = todoItem.Status == ItemStatus.Todo ? ItemStatus.Completed : ItemStatus.Todo;
-            IsBusy = false;
+            SaveToDoItem(todoItem);
         }
 
         public void AddTodoItem(TodoItem todoItem)
         {
-            IsBusy = true;
-            if (todoItem == null) return;
+            if (todoItem == null) throw new ArgumentNullException(nameof(todoItem), "Not item given.");
 
             TodoRepository.AddItem(todoItem);
             TodoItems = TodoRepository.GetAllItems().ToList();
-            //TodoItems.Add(todoItem);
-
-            IsBusy = false;
         }
 
         public void CreateNewItem(string title)
         {
-            if (string.IsNullOrWhiteSpace(title)) throw new ArgumentException("Title cannot be empty");
+            if (string.IsNullOrWhiteSpace(title)) throw new ArgumentOutOfRangeException(nameof(title), "Title cannot be empty.");
 
             AddTodoItem(new TodoItem(title: title));
         }
 
         public void RemoveTodoItem(TodoItem todoItem)
         {
-            throw new NotImplementedException();
+            if (todoItem == null) throw new ArgumentNullException(nameof(todoItem), "Not item given.");
+
+            TodoRepository.DeleteItem(todoItem);
+            TodoItems = TodoRepository.GetAllItems().ToList();
         }
     }
 }

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 
 namespace ModelLayer.Models
 {
@@ -40,9 +38,9 @@ namespace ModelLayer.Models
         public DateTime DateAdded { get; private set; }
         public DateTime DateLastUpdate { get; private set; }
 
-        public bool IsDone()
+        public bool IsDone
         {
-            return Status == ItemStatus.Completed;
+            get{ return Status == ItemStatus.Completed; }
         }
 
         private void SetStatus<T>(ref T backingFiled, T value, [CallerMemberName] string propertyName = null)
