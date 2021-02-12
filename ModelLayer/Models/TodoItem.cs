@@ -10,11 +10,11 @@ namespace ModelLayer.Models
         {
             Title = title;
             Status = ItemStatus.Todo;
-            DateAdded = DateTime.Now;
+            DateAdded = DateTimeOffset.UtcNow;
             DateLastUpdate = DateAdded;
         }
 
-        public TodoItem(uint id, string title, ItemStatus status, DateTime dateAdded, DateTime dateLastUpdate)
+        public TodoItem(uint id, string title, ItemStatus status, DateTimeOffset dateAdded, DateTimeOffset dateLastUpdate)
         {
             Id = id;
             Title = title;
@@ -35,8 +35,8 @@ namespace ModelLayer.Models
                 SetStatus(ref status, value);
             }
         }
-        public DateTime DateAdded { get; private set; }
-        public DateTime DateLastUpdate { get; private set; }
+        public DateTimeOffset DateAdded { get; private set; }
+        public DateTimeOffset DateLastUpdate { get; private set; }
 
         public bool IsDone
         {
@@ -47,7 +47,7 @@ namespace ModelLayer.Models
         {
             if (EqualityComparer<T>.Default.Equals(backingFiled, value)) return;
             backingFiled = value;
-            DateLastUpdate = DateTime.Now;
+            DateLastUpdate = DateTimeOffset.UtcNow;
         }
     }
 

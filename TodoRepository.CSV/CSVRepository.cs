@@ -53,8 +53,8 @@ namespace TodoRepository.CSV
                         id: uint.Parse(elements[0]),
                         title: elements[1],
                         status: (ItemStatus)Enum.Parse(typeof(ItemStatus), elements[2]),
-                        dateAdded: DateTime.Parse(elements[3]),
-                        dateLastUpdate: DateTime.Parse(elements[4])
+                        dateAdded: DateTimeOffset.Parse(elements[3]),
+                        dateLastUpdate: DateTimeOffset.Parse(elements[4])
                     ));
                 }
             }
@@ -79,7 +79,7 @@ namespace TodoRepository.CSV
 
         private string TodoItemToFileLine(TodoItem todoItem)
         {
-            return $"{todoItem.Id}|{todoItem.Title}|{todoItem.Status}|{todoItem.DateAdded.ToString()}|{todoItem.DateLastUpdate.ToString()}";
+            return $"{todoItem.Id}|{todoItem.Title}|{todoItem.Status}|{todoItem.DateAdded.ToString("O")}|{todoItem.DateLastUpdate.ToString("O")}";
         }
 
         private uint GetNewId()
