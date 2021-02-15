@@ -4,85 +4,94 @@
 }
 else
 {
-    <h2>Todo list</h2>
+<div id="accordion">
+    <h5>
+        @DisplayedItemsStatus.ToString()
+    </h5>
+
     <div class="itemList">
-        @foreach(TodoItem item in todoListViewModel.TodoItems.OrderBy(item=>item.IsDone).ThenBy(x=>x.DateAdded))
+        @foreach (TodoItem item in todoListViewModel.TodoItems.Where(x => x.Status == DisplayedItemsStatus).OrderBy(item => item.IsDone).ThenBy(x => x.DateAdded))
         {
-        <div class="@(item.IsDone ? "itemDoneDecor" : "itemNotDoneDecor")">
-            <span @onclick="@(() => { ItemChangeStatus(item); })">
-                <Icon Type="@(item.IsDone ? "check-circle" : "minus-circle")" Theme="@(item.IsDone? "fill" : "outline")" Style="font-size: 30px; padding: 10px;" />
-                @($"{item.DateAdded:d} - {item.Title}")
-            </span>
-            <Icon Type="close" class="removeButton"  @onclick="@(() => { ItemDelete(item); })"/>
-        </div>
+            <div class="@(item.IsDone ? "itemDoneDecor" : "itemNotDoneDecor")">
+                <span @onclick="@(() => { ItemChangeStatus(item); })">
+                    <Icon Type="@(item.IsDone ? "check-circle" : "minus-circle")" Theme="@(item.IsDone? "fill" : "outline")" Style="font-size: 30px; padding: 10px;" />
+                    @($"{item.DateAdded:d} - {item.Title}")
+                </span>
+                <Icon Type="close" class="removeButton" @onclick="@(() => { ItemDelete(item); })" />
+            </div>
         }
     </div>
-}
-
-@code {
-    [CascadingParameter(Name = "todoListViewModel")]
-    ITodoViewModel? todoListViewModel { get; set; }
-
-    public void ItemChangeStatus(TodoItem item)
-    {
-        todoListViewModel?.ChangeItemStatus(item);
-    }
-
-    public void ItemDelete(TodoItem item)
-    {
-        todoListViewModel?.RemoveTodoItem(item);
-    }
-}
-
-<style>
-
-    h2 {
-        color: white;
-        padding-left: 20px;
-        padding-top: 10px;
-    }
-
-    .itemList {
-        background-color: rgba(0,0,0,0.5);
-        margin-left: 10px;
-        margin-right: 10px;
-        color: white;
-        border-radius: 5px;
-        padding-bottom: 2px;
-        border: 1px solid rgba(0,0,0,0.6);
-    }
-
-    .itemDoneDecor, .itemNotDoneDecor {
-        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-        display: flex;
-        justify-content: space-between;
-        margin: 5px;
-    }
-
-    .itemDoneDecor {
-        color: rgba(255, 255, 255, 0.5);
-        text-decoration: line-through;
-    }
-
-        .itemDoneDecor:hover {
-            color: deepskyblue;
+</div>
         }
 
-    .itemNotDoneDecor{
-        color: white;
-    }
-        .itemNotDoneDecor:hover {
-            color: deepskyblue;
+        @code {
+            [CascadingParameter(Name = "todoListViewModel")]
+            ITodoViewModel? todoListViewModel { get; set; }
+
+            [Parameter]
+            public ItemStatus DisplayedItemsStatus { get; set; }
+
+            public void ItemChangeStatus(TodoItem item)
+            {
+                todoListViewModel?.ChangeItemStatus(item);
+            }
+
+            public void ItemDelete(TodoItem item)
+            {
+                todoListViewModel?.RemoveTodoItem(item);
+            }
         }
 
-    .removeButton {
-        font-size: 20px;
-        color: rgba(255, 255, 255, 0.5);
-        padding: 10px;
-        padding-top: 13px;
-    }
+        <style>
 
-        .removeButton:hover {
-            color: rgba(254, 70, 70, 0.60);
-        }
-</style>
+            h5 {
+                color: white;
+                padding-left: 20px;
+                padding-top: 10px;
+            }
+
+            .itemList {
+                background-color: rgba(0,0,0,0.5);
+                margin-left: 10px;
+                margin-right: 10px;
+                color: white;
+                border-radius: 5px;
+                padding-bottom: 2px;
+                border: 1px solid rgba(0,0,0,0.6);
+            }
+
+            .itemDoneDecor, .itemNotDoneDecor {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+                display: flex;
+                justify-content: space-between;
+                margin: 5px;
+            }
+
+            .itemDoneDecor {
+                color: rgba(255, 255, 255, 0.5);
+                text-decoration: line-through;
+            }
+
+                .itemDoneDecor:hover {
+                    color: deepskyblue;
+                }
+
+            .itemNotDoneDecor {
+                color: white;
+            }
+
+                .itemNotDoneDecor:hover {
+                    color: deepskyblue;
+                }
+
+            .removeButton {
+                font-size: 20px;
+                color: rgba(255, 255, 255, 0.5);
+                padding: 10px;
+                padding-top: 13px;
+            }
+
+                .removeButton:hover {
+                    color: rgba(242, 33, 33, 0.81);
+                }
+        </style>

@@ -6,8 +6,9 @@
 
 <div class="mainBody">
     <CascadingValue Value=@todoListViewModel Name="todoListViewModel">
-        <TodoListComponent />
-        <TodoListAddComponent/>
+        <TodoListComponent DisplayedItemsStatus="ItemStatus.Todo"/>
+        <TodoListComponent DisplayedItemsStatus="ItemStatus.Completed"/>
+        <TodoListAddComponent />
     </CascadingValue>
 </div>
 

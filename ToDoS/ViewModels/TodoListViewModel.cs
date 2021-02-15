@@ -40,6 +40,7 @@ namespace ToDoS.ViewModels
 
             todoItem.Status = todoItem.Status == ItemStatus.Todo ? ItemStatus.Completed : ItemStatus.Todo;
             SaveToDoItem(todoItem);
+            OnPropertyChanged();
         }
 
         public void AddTodoItem(TodoItem todoItem)
