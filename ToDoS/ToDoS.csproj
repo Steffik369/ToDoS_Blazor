@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ModelLayer\ToDoS.Shared.csproj" />
     <ProjectReference Include="..\TodoRepository.CSV\TodoRepository.CSV.csproj" />
+    <ProjectReference Include="..\TodoRepository.SQL\TodoRepository.SQL.csproj" />
   </ItemGroup>
 
 </Project>

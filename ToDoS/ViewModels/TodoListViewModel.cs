@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TodoRepository.CSV;
+using TodoRepository.SQL;
 using ToDoS.Shared.Models;
 using ToDoS.Shared.Repositories;
 
@@ -12,7 +13,8 @@ namespace ToDoS.ViewModels
         ITodoRepository TodoRepository;
         public TodoListViewModel()
         {
-            TodoRepository = new CSVRepository();
+            //TodoRepository = new CSVRepository();
+            TodoRepository = new SQLRepository();
             todoItems = TodoRepository.GetAllItems().ToList();
         }
 
