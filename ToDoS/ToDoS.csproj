@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ModelLayer\ModelLayer.csproj" />
+    <ProjectReference Include="..\ModelLayer\ToDoS.Shared.csproj" />
     <ProjectReference Include="..\TodoRepository.CSV\TodoRepository.CSV.csproj" />
   </ItemGroup>
 

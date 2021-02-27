@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
-namespace ModelLayer.Models
+namespace ToDoS.Shared.Models
 {
     public class TodoItem
     {

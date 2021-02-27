@@ -1,9 +1,9 @@
-﻿using ModelLayer.Models;
-using ModelLayer.Repositories;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using TodoRepository.CSV;
+using ToDoS.Shared.Models;
+using ToDoS.Shared.Repositories;
 
 namespace ToDoS.ViewModels
 {

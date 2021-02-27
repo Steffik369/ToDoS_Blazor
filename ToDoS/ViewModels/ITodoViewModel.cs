@@ -1,6 +1,6 @@
-﻿using ModelLayer.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
+using ToDoS.Shared.Models;
 
 namespace ToDoS.ViewModels
 {

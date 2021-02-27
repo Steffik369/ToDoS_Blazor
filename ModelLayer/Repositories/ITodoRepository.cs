@@ -1,7 +1,7 @@
-﻿using ModelLayer.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using ToDoS.Shared.Models;
 
-namespace ModelLayer.Repositories
+namespace ToDoS.Shared.Repositories
 {
     public interface ITodoRepository
     {

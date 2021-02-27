@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoS", "ToDoS\ToDoS.csproj", "{7A026EA5-E498-4F21-A9FB-FC7C9D8E7C98}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelLayer", "ModelLayer\ModelLayer.csproj", "{015CE802-4554-4326-8921-DE387C871780}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoS.Shared", "ModelLayer\ToDoS.Shared.csproj", "{015CE802-4554-4326-8921-DE387C871780}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repositories", "Repositories", "{45BAAAD1-8CB3-45F5-A96D-0601E3D1F2D4}"
 EndProject
@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoRepository.CSV", "TodoR
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{939C4102-6330-48CE-BD76-A0789479BBF0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDos.Test", "ViewModel.Test\ToDos.Test.csproj", "{BF557FEC-2CD4-401E-B288-6A65C9E874A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoS.Test", "ViewModel.Test\ToDoS.Test.csproj", "{BF557FEC-2CD4-401E-B288-6A65C9E874A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

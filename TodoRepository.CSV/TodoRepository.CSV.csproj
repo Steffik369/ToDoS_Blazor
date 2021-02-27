@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ModelLayer\ModelLayer.csproj" />
+    <ProjectReference Include="..\ModelLayer\ToDoS.Shared.csproj" />
   </ItemGroup>
 
 </Project>
